@@ -1,0 +1,37 @@
+version: '2'
+
+services:
+  spark:
+    image: docker.io/bitnami/spark:3-debian-10
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - .:/app
+    ports:
+      - '127.0.0.1:8080:8080'
+  spark-worker-1:
+    image: docker.io/bitnami/spark:3-debian-10
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - .:/app
+  work-env:
+    image: bitnami/spark:3-debian-10
+    volumes:
+      - .:/app
+    command: tail -f /dev/null
+    user: root
+    working_dir: /app
+    environment:
+      PYTHONPATH: /opt/bitnami/spark/python:/opt/bitnami/spark/python/lib/py4j-0.10.9-src.zip
