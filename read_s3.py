@@ -39,6 +39,8 @@ hadoop_conf.set("fs.s3a.access.key", s3_key)
 hadoop_conf.set("fs.s3a.secret.key", s3_secret)
 hadoop_conf.set("fs.s3a.endpoint", s3_endpoint)
 hadoop_conf.set("fs.s3a.impl","org.apache.hadoop.fs.s3a.S3AFileSystem")
+# use path style access for minio. Do not use for aws s3
+# for s3, set to "false"
 hadoop_conf.set("fs.s3a.path.style.access", "true")
 df = spark_sess.read.csv("s3a://bucket-name/path/to/file.csv")
 print(df)
