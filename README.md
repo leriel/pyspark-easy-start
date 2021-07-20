@@ -28,9 +28,9 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 +----+---------+---------+---------+
 ```
 
-There are also `run_sql.sh` and `run_file.sh` scripts working for mac and linux.
+There are also `run_sql.sh`, `run_file.sh` and `run_s3.sh` scripts working for mac and linux.
 
-Feel free to edit two .py files provided or create new ones. However, make sure any new files are inside same directory.
+Feel free to edit either of the .py files provided or create new ones. However, make sure any new files are inside same directory.
 
 ## Requirements:
 * [docker](https://docs.docker.com/get-docker/)
@@ -51,7 +51,9 @@ so that the "local" file path resolves same way for every node.
 
 ## Note about s3 / google cloud storage
 
-I haven't explored that at the time of writing. The required jar files are in the image, however i'm not clear on how to propagate required credentials.
+Please update `run_s3.py` with s3 credentials (and endpoint if running own s3 service) file to run the s3 example. Credentials are provided inside python code which is not optimal - please do not do that for files going into any code repository.
+
+To properly provide credentials and other info like s3 endpoint, you will probably have to use workers to propagate them (perhaps env vars?). I haven't researched this aspect yet.
 
 ## Credits:
 * Bitnami for their easy to use [image](https://hub.docker.com/r/bitnami/spark/)
