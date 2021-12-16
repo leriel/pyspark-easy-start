@@ -53,7 +53,7 @@ so that the "local" file path resolves same way for every node.
 
 Please update `run_s3.py` with s3 credentials (and endpoint if running own s3 service) file to run the s3 example. Credentials are provided inside python code which is not optimal - please do not do that for files going into any code repository.
 
-To properly provide credentials and other info like s3 endpoint, you will probably have to use workers to propagate them (perhaps env vars?). I haven't researched this aspect yet.
+To properly provide credentials and other info like s3 endpoint, some ideas is to use [env vars](https://docs.python.org/3/library/os.html#os.environ) or [envfile](https://pypi.org/project/python-dotenv/). Please remember to add `.env` and related files to `.gitignore`
 
 ## Credits:
 * Bitnami for their easy to use [image](https://hub.docker.com/r/bitnami/spark/)
